@@ -1,0 +1,79 @@
+/* ==========================================================================
+   NAV — Mobile menu button, mega menu, dropdown link hover
+   JS: modules/nav/mobile-menu.js, modules/nav/mega-menu.js
+   ========================================================================== */
+
+/* ---------- Mobile "four dots" menu button ---------- */
+#mob-menu-btn {
+  display: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  align-items: center;
+  justify-content: center;
+}
+
+#mob-menu-btn svg {
+  display: block;
+}
+
+@media screen and (max-width: 991px) {
+  #mob-menu-btn {
+    display: flex !important;
+  }
+}
+
+/* ---------- Mega menu ---------- */
+/* Hidden by default; JS sets display:block then adds .is-open to animate in */
+.mega-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 30px);
+  left: 0;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease; /* keep in sync with FADE_DURATION in mega-menu.js */
+  pointer-events: none;
+}
+
+.mega-menu.is-open {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+/* Parent nav item anchors the absolutely-positioned menu */
+.w-dropdown {
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  .mega-menu {
+    top: 100% !important;
+  }
+}
+
+/* ---------- Dropdown link hover / focus ---------- */
+.co-navdrop-text {
+  transition: color 150ms ease;
+}
+
+.nav-droplink-wrapper:focus-visible .co-navdrop-text {
+  color: #2bb86a;
+  text-decoration: underline;
+}
+
+@media (hover: hover) {
+  .nav-droplink-wrapper:hover .co-navdrop-text {
+    color: #2bb86a;
+    text-decoration: underline;
+  }
+}

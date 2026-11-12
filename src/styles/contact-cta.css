@@ -1,0 +1,107 @@
+/* ==========================================================================
+   UI — Mobile contact CTA sheet + backdrop
+   JS: modules/ui/contact-cta.js
+   ========================================================================== */
+
+.contact-cta-container {
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease-out,
+    visibility 0s linear 0.55s;
+  will-change: transform, opacity;
+}
+
+.contact-cta-container.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease-out,
+    visibility 0s linear 0s;
+}
+
+.contact-cta-container.is-closing {
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 0.4s cubic-bezier(0.55, 0, 0.68, 0),
+    opacity 0.25s ease-in,
+    visibility 0s linear 0.4s;
+}
+
+/* Close button */
+.contact-cta-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contact-cta-close:hover,
+.contact-cta-close:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.contact-cta-close svg {
+  width: 20px;
+  height: 20px;
+  stroke: #000000;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* Backdrop */
+.contact-cta-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(1, 30, 23, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+}
+
+.contact-cta-backdrop.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0s linear 0s;
+}
+
+/* Desktop/tablet: never shown */
+@media screen and (min-width: 768px) {
+  .contact-cta-container,
+  .contact-cta-backdrop {
+    display: none !important;
+  }
+}
+
+/* Reduced motion: fade only */
+@media (prefers-reduced-motion: reduce) {
+  .contact-cta-container {
+    transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+    transform: none;
+  }
+  .contact-cta-container.is-visible {
+    transition: opacity 0.2s ease, visibility 0s linear 0s;
+    transform: none;
+  }
+}

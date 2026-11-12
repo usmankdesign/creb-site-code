@@ -1,0 +1,25 @@
+/* ==========================================================================
+   CALCULATORS — Returns calculator inputs
+   JS: modules/calculators/returns-calculator.js
+   ========================================================================== */
+
+#amount,
+#years {
+  text-align: center !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+
+/* Hide native number spinners (site-wide) */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+  display: none !important;
+}
+
+input[type=number] {
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}

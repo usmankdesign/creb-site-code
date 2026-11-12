@@ -1,0 +1,13 @@
+{
+  "name": "creb-site-code",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:js": "esbuild src/main.js --bundle --minify --target=es2018 --outfile=dist/main.min.js",
+    "build:css": "esbuild src/main.css --bundle --minify --outfile=dist/main.min.css",
+    "build": "npm run build:js && npm run build:css"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

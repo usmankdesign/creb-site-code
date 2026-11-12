@@ -1,0 +1,38 @@
+/* ==========================================================================
+   UI — Hover tabs (accordion-style)
+   JS: modules/ui/co-tabs.js
+   ========================================================================== */
+
+/* Collapsible body wrapper (injected by JS) */
+.co-tab-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 0.3s ease;
+}
+
+.co-tab-collapse > .co-tab-collapse-inner {
+  min-height: 0;
+  overflow: hidden; /* also contains the body text's margins so spacing animates too */
+}
+
+.co-tab-wrapper.is-active .co-tab-collapse {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.co-tab-wrapper {
+  cursor: default;
+  outline: none;
+}
+
+/* Prevent flash before JS runs: show only the first tab's body */
+.co-tabs-wrapper:not(.is-ready) .co-tab-wrapper:not(:first-child) :is(.co-tab-body, p) {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .co-tab-collapse { transition: none; }
+}

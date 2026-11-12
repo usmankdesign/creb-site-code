@@ -1,0 +1,20 @@
+/* ==========================================================================
+   CALCULATORS — Card calculator
+   JS: modules/calculators/card-calculator.js
+   ========================================================================== */
+
+.calc-preset.is-active {
+  background-color: #0a504f;
+}
+
+.calc-currency-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin: 0 auto;
+}
+
+.calc-currency-prefix {
+  line-height: 1;
+}
