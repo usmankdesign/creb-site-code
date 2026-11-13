@@ -18,18 +18,18 @@
   overflow: hidden; /* also contains the body text's margins so spacing animates too */
 }
 
-.co-tab-wrapper.is-active .co-tab-collapse {
+.co-tab-wrap.is-active .co-tab-collapse {
   grid-template-rows: 1fr;
   opacity: 1;
 }
 
-.co-tab-wrapper {
+.co-tab-wrap {
   cursor: default;
   outline: none;
 }
 
 /* Prevent flash before JS runs: show only the first tab's body */
-.co-tabs-wrapper:not(.is-ready) .co-tab-wrapper:not(:first-child) :is(.co-tab-body, p) {
+.co-tabs-wrapper:not(.is-ready) > .co-tab-wrap:not(:first-child) :is(.co-tab-body-copy, .co-tab-body, p) {
   display: none;
 }
 

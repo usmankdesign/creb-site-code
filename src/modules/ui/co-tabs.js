@@ -1,17 +1,28 @@
 /* ==========================================================================
    UI — Hover tabs (accordion-style)
-   Each .co-tabs-wrapper holds several .co-tab-wrapper items. The hovered /
+   Each .co-tabs-wrapper holds several .co-tab-wrap items. The hovered /
    tapped / focused tab expands its body; the last one stays open.
    First tab is open by default.
 
-   Requires: .co-tabs-wrapper > .co-tab-wrapper (body = .co-tab-body or first <p>)
+   Requires: .co-tabs-wrapper > .co-tab-wrap
+             body = .co-tab-body-copy, else .co-tab-body, else the tab's first <p>
    CSS: styles/co-tabs.css
    ========================================================================== */
 
 var HOVER_DELAY = 80; // ms — stops accidental switching while the cursor passes over
+var TAB = '.co-tab-wrap';
+var BODY = ['.co-tab-body-copy', '.co-tab-body', 'p'];
+
+function findBody(tab) {
+  for (var i = 0; i < BODY.length; i++) {
+    var el = tab.querySelector(BODY[i]);
+    if (el) return el;
+  }
+  return null;
+}
 
 function wrapBody(tab) {
-  var body = tab.querySelector('.co-tab-body') || tab.querySelector('p');
+  var body = findBody(tab);
   if (!body || body.closest('.co-tab-collapse')) return;
 
   var outer = document.createElement('div');
@@ -26,7 +37,10 @@ function wrapBody(tab) {
 
 export function initCoTabs() {
   document.querySelectorAll('.co-tabs-wrapper').forEach(function (container) {
-    var tabs = Array.prototype.slice.call(container.querySelectorAll('.co-tab-wrapper'));
+    // Direct children only, so a nested tab set can't be picked up twice
+    var tabs = Array.prototype.filter.call(container.children, function (el) {
+      return el.matches(TAB);
+    });
     if (!tabs.length) return;
 
     tabs.forEach(wrapBody);

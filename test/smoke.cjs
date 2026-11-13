@@ -43,7 +43,7 @@ const FULL_PAGE = `
   <form class="klaviyo-form" data-klaviyo-list-id="TEST"><input name="email" value="a@b.co"></form>
   <div class="faq-item"><span class="faq-icon">+</span><div class="faq-answer"></div></div>
   <span class="copyright-year"></span>
-  <div class="co-tabs-wrapper"><div class="co-tab-wrapper"><p>A</p></div><div class="co-tab-wrapper"><p>B</p></div></div>
+  <div class="co-tabs-wrapper"><div class="co-tab-wrap first"><h5>A</h5><p class="co-tab-body-copy">A body</p></div><div class="co-tab-wrap last"><h5>B</h5><p class="co-tab-body-copy">B body</p></div></div>
   <div class="contact-cta-container"></div><a id="creb-ir-cta" href="#"></a>
   <div id="cookie-popup"></div>
   <a id="applink" href="https://app.compoundbanc.com/signup">Invest</a>
@@ -69,6 +69,13 @@ const FULL_PAGE = `
   assert.strictEqual(d.querySelector('.copyright-year').textContent, String(new Date().getFullYear()), 'Copyright year');
   assert.ok(d.querySelector('.creb-tel-wrap .creb-tel-flag'), 'Phone input enhanced');
   assert.ok(d.querySelector('.co-tabs-wrapper').classList.contains('is-ready'), 'Co-tabs ready');
+  var coTabs = d.querySelectorAll('.co-tab-wrap');
+  assert.ok(coTabs[0].classList.contains('is-active'), 'Co-tabs: first tab open');
+  assert.ok(!coTabs[1].classList.contains('is-active'), 'Co-tabs: second tab closed');
+  assert.ok(coTabs[1].querySelector('.co-tab-collapse .co-tab-body-copy'), 'Co-tabs: body wrapped');
+  assert.ok(!coTabs[1].querySelector('.co-tab-collapse h5'), 'Co-tabs: heading not wrapped');
+  coTabs[1].dispatchEvent(new d.defaultView.MouseEvent('click', { bubbles: true }));
+  assert.ok(coTabs[1].classList.contains('is-active') && !coTabs[0].classList.contains('is-active'), 'Co-tabs: click switches tab');
   assert.ok(d.querySelector('.contact-cta-backdrop'), 'Contact CTA backdrop injected');
   assert.ok(d.getElementById('cookie-close'), 'Cookie close button injected');
 
